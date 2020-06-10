@@ -36,13 +36,13 @@
 \makeabbrev{\mathbb}{bb#1}{
   A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z }
 
+\RequirePackage{amsthm}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[T2A]{fontenc}
 \RequirePackage[svgnames]{xcolor}
 \RequirePackage[pdftex]{graphicx}
 \RequirePackage{ amsfonts
                , amsmath
-               , amsthm
                , amssymb
                , caption
                , epigraph
@@ -60,7 +60,6 @@
                , tcolorbox
                , verbatim
                , calligra
-               , xspace
                }
 
 \RequirePackage{tikz}
@@ -74,8 +73,8 @@
  , numbers
 ]{natbib}
 
-\RequirePackage
-  [ hyperfootnotes=true
+\RequirePackage[%
+    hyperfootnotes=true
   , bookmarksnumbered=true
   , bookmarksopen=true
   , breaklinks=true
@@ -84,12 +83,12 @@
   , linkcolor=blue!40!black%
   ]{hyperref}
 
-\RequirePackage
-  [ left=3.5cm
+\RequirePackage[%
+	  left=3.5cm
 	, right=3.5cm
 	, top=4cm
 	, bottom=6cm%
-  ]{geometry}
+]{geometry}
 
 \tikzset{commutative diagrams/.cd,arrow style=tikz,diagrams={>=stealth'}}
 \def\To{\Rightarrow}
@@ -177,10 +176,6 @@
  \defthm{heuristics}{Euristica}
 }
 
-\DeclareOption{blinded}{
-\let\author\relax
-\let\address\relax
-}
 
 \ExecuteOptions{english}
 \ProcessOptions\relax
@@ -196,13 +191,9 @@
 
 \DeclareDocumentEnvironment{enumtag}{m}{%
 	\begin{enumerate}%
-    [ label = \textsc{#1}\oldstylenums{\arabic*})
-    , ref   = \textsc{#1}\oldstylenums{\arabic*}%
-    ]%
-}
-{ 
-  \end{enumerate} 
-}
+		[ label = \textsc{#1}\oldstylenums{\arabic*}),%
+		  ref   = \textsc{#1}\oldstylenums{\arabic*}%
+	  ] }{ \end{enumerate} }
 
 \def\op{\text{op}}
 \def\co{\text{co}}
@@ -227,14 +218,12 @@
 
 \let\xto\xrightarrow
 \let\xot\xleftarrow
-
-\newcommand{\rotTo}[1]{\rotatebox[origin=c]{#1}{$\Rightarrow$}}
-  \newcommand{\Nearrow}{\rotTo{45}}
-  \newcommand{\Nwarrow}{\rotTo{135}}
-  \newcommand{\Searrow}{\rotTo{-45}}
-  \newcommand{\Swarrow}{\rotTo{225}}
-  \newcommand{\Sarrow}{\rotTo{-90}}
-  \newcommand{\Narrow}{\rotTo{90}}
+\newcommand{\Nearrow}{\rotatebox[origin=c]{45}{$\Rightarrow$}}
+\newcommand{\Nwarrow}{\rotatebox[origin=c]{135}{$\Rightarrow$}}
+\newcommand{\Searrow}{\rotatebox[origin=c]{-45}{$\Rightarrow$}}
+\newcommand{\Swarrow}{\rotatebox[origin=c]{225}{$\Rightarrow$}}
+\newcommand{\Sarrow}{\rotatebox[origin=c]{-90}{$\Rightarrow$}}
+\newcommand{\Narrow}{\rotatebox[origin=c]{90}{$\Rightarrow$}}
 
 \DeclareMathOperator{\colim}{colim}
 \DeclareMathOperator{\coker}{coker}
@@ -245,31 +234,44 @@
 \makeatother
 
 \tcbuselibrary{most}
-\tcolorboxenvironment
-  {quote}{ blanker
-         , before skip=10pt
-         , after skip=10pt
-         , borderline west={6mm}{5pt}{gray!15}
-         , breakable
-         }
+\tcolorboxenvironment{quote}{ blanker
+                            , before skip=10pt
+                            , after skip=10pt
+                            , borderline west={6mm}{5pt}{gray!15}
+                            , breakable
+                            }
 
-\newcommand{\pto}{%
-  \mathrel{%
-    \ooalign{
-      \hfil\kern-2pt%
-      $\mapstochar$%
-      \hfil\cr\hfil%
-      $\to$\hfil%
-    }%
-  }%
-}
+\newcommand{\pto}{\mathop{\ooalign{\hfil\kern-2pt$\mapstochar$\hfil\cr\hfil$\to$\hfil}}}
 
 \usepackage{turnstile}
 \newcommand{\adjunct}[2]{\nsststile{#2}{#1}}
 
 \setcounter{tocdepth}{1}
 
-\newcommand{\putbib}[2][amsalpha]{
-  \bibliography{#2}{}
-  \bibliographystyle{#1}
+\newcommand{\putbib}[2]{
+  \bibliography{#1}{}
+  \bibliographystyle{#2}
 }
+
+\usetikzlibrary{decorations.markings}
+\tikzstyle{pro} =
+  [ decoration={ markings
+               , mark = at position 0.5 with
+                   {\draw[-] (0,-1.25pt) -- (0,1.25pt);}
+               }
+  , postaction ={decorate}
+  ]
+
+\DeclareMathAlphabet{\mybb}{U}{BOONDOX-ds}{m}{n}
+
+\newcommand*{\Scale}[2][4]{\scalebox{#1}{\ensuremath{#2}}}%
+\def\lrc{
+\begin{tikzpicture}[scale=.33]
+	\draw[-] (0,0) -| (1,1);
+\end{tikzpicture}
+}
+
+\newcommand{\pb}{\arrow[dr, phantom, "\lrc", very near start]}
+
+\def\[{\begin{equation}}
+\def\]{\end{equation}}
