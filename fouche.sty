@@ -245,12 +245,14 @@
 
 \let\xto\xrightarrow
 \let\xot\xleftarrow
-\newcommand{\Nearrow}{\rotatebox[origin=c]{45}{$\Rightarrow$}}
-\newcommand{\Nwarrow}{\rotatebox[origin=c]{135}{$\Rightarrow$}}
-\newcommand{\Searrow}{\rotatebox[origin=c]{-45}{$\Rightarrow$}}
-\newcommand{\Swarrow}{\rotatebox[origin=c]{225}{$\Rightarrow$}}
-\newcommand{\Sarrow}{\rotatebox[origin=c]{-90}{$\Rightarrow$}}
-\newcommand{\Narrow}{\rotatebox[origin=c]{90}{$\Rightarrow$}}
+\newcommand{\rot}[3][c]{\rotatebox[origin=#1]{#2}{$#3$}}
+\newcommand{\rotarrow}[2]{\rotatebox[origin=#1]{#2}{$\Rightarrow$}}
+\newcommand{\Nearrow}{\rotarrow{45}}
+\newcommand{\Nwarrow}{\rotarrow{135}}
+\newcommand{\Searrow}{\rotarrow{-45}}
+\newcommand{\Swarrow}{\rotarrow{225}}
+\newcommand{\Sarrow}{\rotarrow{-90}}
+\newcommand{\Narrow}{\rotarrow{90}}
 
 \DeclareMathOperator{\colim}{colim}
 \DeclareMathOperator{\coker}{coker}
