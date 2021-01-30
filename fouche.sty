@@ -91,7 +91,7 @@
 	  left=3.5cm
 	, right=3.5cm
 	, top=4cm
-	, bottom=6cm%
+  , bottom=6cm%
 ]{geometry}
 
 \tikzset{commutative diagrams/.cd,arrow style=tikz,diagrams={>=stealth'}}
@@ -330,5 +330,11 @@
 			\end{xsmallmatrix}\right]}}
 
 \usepackage{adjustbox}
-\newenvironment{adju}{%
-\begin{center}\begin{adjustbox}{max height=0.5\textheight, max width=\textwidth}}{\end{adjustbox}\end{center}}
+\newenvironment{adju}[1][0.925]{%
+\begin{center}\begin{adjustbox}{max height=0.5\textheight, max width=#1\textwidth}}{\end{adjustbox}\end{center}}
+
+\newcommand{\cop}[2]{
+  \left[\begin{smallmatrix}
+    #1 \\ #2
+  \end{smallmatrix}\right]
+}
