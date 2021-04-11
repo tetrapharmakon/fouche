@@ -314,6 +314,19 @@
 \newenvironment{xsmallmatrix}[1]
 {\renewcommand\thickspace{\kern#1}\smallmatrix}
 {\endsmallmatrix}
+\NewDocumentCommand{\prevar}{o m m}{
+	\IfNoValueTF{#1}{
+			\begin{smallmatrix}
+				#2 \\
+				\downarrow \\
+				#3
+			\end{smallmatrix}}
+	{
+			\begin{xsmallmatrix}{0em}
+				& #2 \\
+				#1 & \downarrow \\
+				& #3
+			\end{xsmallmatrix}}}
 \NewDocumentCommand{\var}{o m m}{
 	\IfNoValueTF{#1}{
 		\left[
@@ -334,6 +347,11 @@
 \newenvironment{adju}[1][0.925]{%
 \begin{center}\begin{adjustbox}{max height=0.5\textheight, max width=#1\textwidth}}{\end{adjustbox}\end{center}}
 
+\newcommand{\precop}[2]{
+  \begin{smallmatrix}
+    #1 \\ #2
+  \end{smallmatrix}
+}
 \newcommand{\cop}[2]{
   \left[\begin{smallmatrix}
     #1 \\ #2
