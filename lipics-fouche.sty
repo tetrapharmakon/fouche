@@ -131,16 +131,16 @@
   \expandafter\let\csname c@#1\endcsname\c@theorem}
 \makeatother
 
-% \DeclareOption{english}{
-% \theoremstyle{definition}
-% \numberwithin{equation}{section}
+\DeclareOption{english}{
+\theoremstyle{definition}
+\numberwithin{equation}{section}
 % \newtheorem{theorem}{Theorem}[section]
 %  \defthm{corollary}{Corollary}
 %  \defthm{proposition}{Proposition}
 %  \defthm{lemma}{Lemma}
 %  \defthm{claim}{Claim}
 %  \defthm{definition}{Definition}
-%  \defthm{notation}{Notation}
+ \defthm{notation}{Notation}
 %  \defthm{remark}{Remark}
 %  \defthm{conjecture}{Conjecture}
 %  \defthm{axiom}{Axiom}
@@ -156,7 +156,7 @@
 %  \defthm{terminology}{Terminology}
 %  \defthm{heuristics}{Heuristics}
 %  \defthm{conclusion}{Conclusion}
-% }
+}
 
 \makeatletter
 \def\renewtheorem#1{%
