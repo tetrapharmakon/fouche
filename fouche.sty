@@ -63,6 +63,7 @@
                , tcolorbox
                , verbatim
                , calligra
+               , url
                }
 
 \RequirePackage{tikz}
@@ -219,6 +220,8 @@
 \setlength{\sepwid}{.4pt}
 \def\firstblank{\,\rule{\seplen}{\sepwid}\,}
 \def\sndblank{\firstblank\llap{\raisebox{2pt}{\firstblank}}}
+
+\let\secondblank\sndblank
 
 \DeclareDocumentEnvironment{enumtag}{m}{%
 	\begin{enumerate}%
