@@ -281,7 +281,7 @@
                             , breakable
                             }
 
-\newcommand{\pto}{\mathop{\ooalign{\hfil\kern-2pt$\mapstochar$\hfil\cr\hfil$\to$\hfil}}}
+\newcommand{\pto}{\mathrel{\ooalign{\hfil\kern-2pt$\mapstochar$\hfil\cr\hfil$\to$\hfil}}}
 
 \usepackage{turnstile}
 \newcommand{\adjunct}[2]{\nsststile{#2}{#1}}
@@ -312,6 +312,7 @@
 }
 
 \newcommand{\pb}{\arrow[dr, phantom, "\lrc", very near start]}
+\newcommand{\xpb}{\ar@{}[dr]|(.33){\lrc}}
 
 \def\[{\begin{equation}}
 \def\]{\end{equation}}
