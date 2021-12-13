@@ -140,7 +140,7 @@
 %  \defthm{lemma}{Lemma}
 %  \defthm{claim}{Claim}
 %  \defthm{definition}{Definition}
- \defthm{notation}{Notation}
+%  \defthm{notation}{Notation}
 %  \defthm{remark}{Remark}
 %  \defthm{conjecture}{Conjecture}
 %  \defthm{axiom}{Axiom}
@@ -284,9 +284,9 @@
 
 \setcounter{tocdepth}{1}
 
-\newcommand{\putbib}[1]{
+\newcommand{\putbib}[2]{
   \bibliography{#1}{}
-  % \bibliographystyle{#2}
+  \bibliographystyle{#2}
 }
 
 \usetikzlibrary{decorations.markings}
