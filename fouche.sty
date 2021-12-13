@@ -40,14 +40,13 @@
   A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z }
 
 \RequirePackage{amsthm}
-\RequirePackage[T2A,T1]{fontenc}
 \RequirePackage[utf8x]{inputenc}
+\RequirePackage[T2A]{fontenc}
 \RequirePackage[svgnames]{xcolor}
 \RequirePackage[pdftex]{graphicx}
 \RequirePackage{ amsfonts
                , amsmath
                , amssymb
-               , booktabs
                , caption
                , epigraph
                , enumitem
@@ -60,14 +59,15 @@
                , savesym
                , setspace
                , stmaryrd
+               , tikz-cd
                , tcolorbox
                , verbatim
                , calligra
-               , url
                }
 
-\RequirePackage{tikz, tikz-cd}
-	\usetikzlibrary{calc,matrix,arrows, positioning}
+\RequirePackage{tikz}
+	\usetikzlibrary{calc}
+	\usetikzlibrary{matrix,arrows}
 
 \RequirePackage[all,2cell]{xy}\UseAllTwocells
 
@@ -76,16 +76,16 @@
 %  , numbers
 % ]{natbib}
 
-\RequirePackage[%
-    hyperfootnotes=true
-  , bookmarksnumbered=true
-  , bookmarksopen=true
-  , breaklinks=true
-  , urlcolor=red!40!black
-  , colorlinks%
-  , citecolor=blue!40!black%
-  , linkcolor=blue!40!black%
-  ]{hyperref}
+% \RequirePackage[%
+%     hyperfootnotes=true
+%   , bookmarksnumbered=true
+%   , bookmarksopen=true
+%   , breaklinks=true
+%   , urlcolor=red!40!black
+%   , colorlinks%
+%   , citecolor=blue!40!black%
+%   , linkcolor=blue!40!black%
+%   ]{hyperref}
 
 \RequirePackage[%
 	  left=3.5cm
@@ -94,7 +94,6 @@
   , bottom=6cm%
 ]{geometry}
 
-\tikzset{>=stealth'}
 \tikzset{commutative diagrams/.cd,arrow style=tikz,diagrams={>=stealth'}}
 \def\To{\Rightarrow}
 
@@ -221,8 +220,6 @@
 \def\firstblank{\,\rule{\seplen}{\sepwid}\,}
 \def\sndblank{\firstblank\llap{\raisebox{2pt}{\firstblank}}}
 
-\let\secondblank\sndblank
-
 \DeclareDocumentEnvironment{enumtag}{m}{%
 	\begin{enumerate}%
 		[ label = \textsc{#1}\oldstylenums{\arabic*}),%
@@ -279,7 +276,7 @@
                             , breakable
                             }
 
-\newcommand{\pto}{\mathrel{\ooalign{\hfil\kern-2pt$\mapstochar$\hfil\cr\hfil$\to$\hfil}}}
+\newcommand{\pto}{\mathop{\ooalign{\hfil\kern-2pt$\mapstochar$\hfil\cr\hfil$\to$\hfil}}}
 
 \usepackage{turnstile}
 \newcommand{\adjunct}[2]{\nsststile{#2}{#1}}
@@ -310,8 +307,6 @@
 }
 
 \newcommand{\pb}{\arrow[dr, phantom, "\lrc", very near start]}
-\newcommand{\xpb}{\ar@{}[dr]|(.33){\lrc}}
-\newcommand{\xpo}{\ar@{}[dr]|(.66){\lrc}}
 
 \def\[{\begin{equation}}
 \def\]{\end{equation}}

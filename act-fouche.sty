@@ -47,7 +47,6 @@
 \RequirePackage{ amsfonts
                , amsmath
                , amssymb
-               , booktabs
                , caption
                , epigraph
                , enumitem
@@ -308,8 +307,6 @@
 }
 
 \newcommand{\pb}{\arrow[dr, phantom, "\lrc", very near start]}
-\newcommand{\xpb}{\ar@{}[dr]|(.33){\lrc}}
-\newcommand{\xpo}{\ar@{}[dr]|(.66){\lrc}}
 
 \def\[{\begin{equation}}
 \def\]{\end{equation}}
@@ -343,10 +340,3 @@
   \end{smallmatrix}\right]
 }
 \def\emdash{\text{-}}
-
-\DeclareRobustCommand{\coprod}{\mathop{\text{\fakecoprod}}}
-\newcommand{\fakecoprod}{%
-  \sbox0{$\prod$}%
-  \smash{\raisebox{\dimexpr.9625\depth-\dp0}{\scalebox{1}[-1]{$\prod$}}}%
-  \vphantom{$\prod$}%
-}
