@@ -77,24 +77,6 @@
 %  , numbers
 % ]{natbib}
 
-% \RequirePackage[%
-%     hyperfootnotes=true
-%   , bookmarksnumbered=true
-%   , bookmarksopen=true
-%   , breaklinks=true
-%   , urlcolor=red!40!black
-%   , colorlinks%
-%   , citecolor=blue!40!black%
-%   , linkcolor=blue!40!black%
-%   ]{hyperref}
-
-% \RequirePackage[%
-% 	  left=3.5cm
-% 	, right=3.5cm
-% 	, top=4cm
-%   , bottom=6cm%
-% ]{geometry}
-
 \tikzset{commutative diagrams/.cd,arrow style=tikz,diagrams={>=stealth'}}
 \def\To{\Rightarrow}
 
@@ -307,7 +289,13 @@
 \end{tikzpicture}
 }
 
-\newcommand{\pb}{\arrow[dr, phantom, "\lrc", very near start]}
+\def\dopb{\begin{tikzpicture}[scale=.375] \draw (0,0) -| (1,1);\end{tikzpicture}}
+\def\xpb{\ar@{}[dr]|(.375){\dopb}}
+\def\dopo{\begin{tikzpicture}[scale=.375] \draw (0,0) |- (1,1);\end{tikzpicture}}
+\def\xpo{\ar@{}[dr]|(.675){\dopo}}
+
+\newcommand{\pb}{\arrow[dr, phantom, "\dopb", very near start]}
+\newcommand{\po}{\arrow[dr, phantom, "\dopo", very near end]}
 
 \def\[{\begin{equation}}
 \def\]{\end{equation}}
