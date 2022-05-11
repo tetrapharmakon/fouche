@@ -296,7 +296,7 @@
 }
 
 \def\dopb{\begin{tikzpicture}[scale=.375] \draw (0,0) -| (1,1);\end{tikzpicture}}
-\def\xpb{\ar@{}[dr]|(.375){\dopb}}
+\newcommand{\xpb}[1][dr]{\ar@{}[#1]|(.375){\dopb}}
 \def\dopo{\begin{tikzpicture}[scale=.375] \draw (0,0) |- (1,1);\end{tikzpicture}}
 \def\xpo{\ar@{}[dr]|(.675){\dopo}}
 
