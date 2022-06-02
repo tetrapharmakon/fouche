@@ -26,7 +26,7 @@
     a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,%
     A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z }
 \makeabbrev{\mathsf}{sf#1}{
-  a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,%
+  a,b,c,d,e,f,g,h,i,j,k,l,m,o,p,q,r,s,t,u,v,w,x,y,z,%
   A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z }
 \makeabbrev{\mathfrak}{fk#1}{
   a,b,c,d,e,f,g,h,j,k,i,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,%
@@ -40,10 +40,10 @@
   A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z }
 
 \RequirePackage{amsthm}
-\RequirePackage[utf8]{inputenc}
-\RequirePackage[T2A]{fontenc}
+% \RequirePackage[utf8]{inputenc}
+% \RequirePackage[T2A]{fontenc}
 \RequirePackage[svgnames]{xcolor}
-\RequirePackage[pdftex]{graphicx}
+% \RequirePackage[pdftex]{graphicx}
 \RequirePackage{ amsfonts
                , amsmath
                , amssymb
@@ -58,7 +58,7 @@
                , stackrel
                , savesym
                , setspace
-               , stmaryrd
+              %  , stmaryrd
                , tikz-cd
                , tcolorbox
                , verbatim
@@ -89,12 +89,12 @@
 %  , numbers
 % ]{natbib}
 
-\RequirePackage[%
-	  left=3.5cm
-	, right=3.5cm
-	, top=4cm
-  , bottom=6cm%
-]{geometry}
+% \RequirePackage[%
+% 	  left=3.5cm
+% 	, right=3.5cm
+% 	, top=4cm
+%   , bottom=6cm%
+% ]{geometry}
 
 \tikzset{commutative diagrams/.cd,arrow style=tikz,diagrams={>=stealth'}}
 \def\To{\Rightarrow}
