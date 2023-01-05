@@ -40,10 +40,7 @@
   A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z }
 
 \RequirePackage{amsthm}
-% \RequirePackage[utf8]{inputenc}
-% \RequirePackage[T2A]{fontenc}
 \RequirePackage[svgnames]{xcolor}
-% \RequirePackage[pdftex]{graphicx}
 \RequirePackage{ amsfonts
                , amsmath
                , amssymb
@@ -58,7 +55,6 @@
                , stackrel
                , savesym
                , setspace
-              %  , stmaryrd
                , tikz-cd
                , tcolorbox
                , verbatim
@@ -78,23 +74,10 @@
 	, breaklinks=true
 	, urlcolor=red!40!black
 	, colorlinks%
-	%, citecolor=blue!40!black%
-	%, linkcolor=blue!40!black%
+	, citecolor=blue!40!black%
+	, linkcolor=blue!40!black%
 	, urlcolor=RoyalBlue
-	, linkcolor=Red
-	, citecolor=Green
 }
-% \RequirePackage[
-%    sort
-%  , numbers
-% ]{natbib}
-
-% \RequirePackage[%
-% 	  left=3.5cm
-% 	, right=3.5cm
-% 	, top=4cm
-%   , bottom=6cm%
-% ]{geometry}
 
 \tikzset{commutative diagrams/.cd,arrow style=tikz,diagrams={>=stealth'}}
 \def\To{\Rightarrow}
@@ -109,11 +92,10 @@
 \renewcommand{\textbf}[1]{\text{\fontseries{b}\selectfont{\upshape #1}}}
 
 \def\cate#1{\textsf{#1}}
- \def\CAT{\cate{CAT}}
- \def\Cat{\cate{Cat}}
+ \def\KAT{\cate{CAT}}
+ \def\Kat{\cate{Cat}}
  \def\Prof{\cate{Prof}}
- \def\Qat{\cate{Cat}}
- \def\caat{\cate{cat}}
+ \def\kat{\cate{cat}}
  \def\Set{\cate{Set}}
  \def\Ab{\cate{Ab}}
  \def\Grp{\cate{Grp}}
@@ -223,10 +205,7 @@
 \def\sndblank{\firstblank\llap{\raisebox{2pt}{\firstblank}}}
 
 \DeclareDocumentEnvironment{enumtag}{m}{%
-	\begin{enumerate}%
-		[ label = \textsc{#1}\oldstylenums{\arabic*}),%
-		  ref   = \textsc{#1}\oldstylenums{\arabic*}%
-	  ] }{ \end{enumerate} }
+	\begin{enumerate}[ label = \textsc{#1}\oldstylenums{\arabic*}), ref   = \textsc{#1}\oldstylenums{\arabic*} ] }{ \end{enumerate} }
 
 \def\op{\text{op}}
 \def\co{\text{co}}
@@ -239,20 +218,22 @@
 \def\RAN{\textsc{Ran}}
 \def\lan{\mathrm{lan}}
 \def\Lan{\mathrm{Lan}}
-\def\Yan{\mathrm{Yan}}
 \def\LAN{\textsc{Lan}}
-\def\rift{\mathrm{rift}}
-\def\Rift{\mathrm{Rift}}
-\def\RIFT{\textsc{Rift}}
-\def\leeft{\mathrm{lift}}
-\def\Lift{\mathrm{Lift}}
-\def\LIFT{\textsc{Lift}}
+\def\Yan{\mathrm{Yan}}
+\def\ryft{\mathrm{rift}}
+\def\Ryft{\mathrm{Rift}}
+\def\RYFT{\textsc{Rift}}
+\def\lyft{\mathrm{lift}}
+\def\Lyft{\mathrm{Lift}}
+\def\LYFT{\textsc{Lift}}
 \def\Nat{\textsf{Nat}}
 
 \let\xto\xrightarrow
 \let\xot\xleftarrow
+
 \newcommand{\rot}[3][c]{\rotatebox[origin=#1]{#2}{$#3$}}
-\newcommand{\rotarrow}[2][c]{\rotatebox[origin=#1]{#2}{$\Rightarrow$}}
+\newcommand{\rotarrow}[2][c]{\rot{#1}{#2}{\Rightarrow}}
+
 \newcommand{\Nearrow}{\rotarrow{45}}
 \newcommand{\Nwarrow}{\rotarrow{135}}
 \newcommand{\Searrow}{\rotarrow{-45}}
@@ -271,12 +252,13 @@
 \makeatother
 
 \tcbuselibrary{most}
-\tcolorboxenvironment{quote}{ blanker
-                            , before skip=10pt
-                            , after skip=10pt
-                            , borderline west={6mm}{5pt}{gray!15}
-                            , breakable
-                            }
+\tcolorboxenvironment%
+  {quote}{ blanker
+         , before skip=10pt
+         , after skip=10pt
+         , borderline west={6mm}{5pt}{gray!15}
+         , breakable
+         }
 
 \newcommand{\pto}{\mathop{\ooalign{\hfil\kern-2pt$\mapstochar$\hfil\cr\hfil$\to$\hfil}}}
 
@@ -311,7 +293,7 @@
 \def\dopb{\begin{tikzpicture}[scale=.375] \draw (0,0) -| (1,1);\end{tikzpicture}}
 \newcommand{\xpb}[1][dr]{\ar@{}[#1]|(.375){\dopb}}
 \def\dopo{\begin{tikzpicture}[scale=.375] \draw (0,0) |- (1,1);\end{tikzpicture}}
-\def\xpo{\ar@{}[dr]|(.675){\dopo}}
+\newcommand{\xpo}[1][dr]{\ar@{}[#1]|(.675){\dopo}}
 
 \newcommand{\pb}{\arrow[dr, phantom, "\dopb", very near start]}
 \newcommand{\po}{\arrow[dr, phantom, "\dopo", very near end]}
@@ -370,3 +352,11 @@
 \newcommand{\adja}[4]{
   #1 : \xymatrix{#2 \ar@<.5em>[r] \ar@{}[r]|\perp & \ar@<.5em>[l] #3 } : #4
 }
+
+
+\NewDocumentCommand{\vxy}{o m}{
+  \IfNoValueTF{#1}
+  {\vcenter{\xymatrix{#2}}} % do if \vxy{bla}
+  {\vcenter{\xymatrix#1{#2}}} % do if \vxy[foo]{bla}
+}
+% \newcommand{\vxy}[1]{\vcenter{\xymatrix{#1}}}
