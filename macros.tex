@@ -1,0 +1,175 @@
+\def\To{\Rightarrow}
+
+\def\cate#1{\textsf{#1}}
+ \def\KAT{\cate{CAT}}
+ \def\Kat{\cate{Cat}}
+ \def\Prof{\cate{Prof}}
+ \def\kat{\cate{cat}}
+ \def\Set{\cate{Set}}
+ \def\Ab{\cate{Ab}}
+ \def\Grp{\cate{Grp}}
+ \def\Top{\cate{Top}}
+ \def\Vec{\cate{Vect}}
+ \def\sSet{\cate{sSet}}
+ \def\Ch{\cate{Ch}}
+ \def\Mfd{\cate{Mfd}}
+ \def\Mod{\cate{Mod}}
+ \def\Alg{\cate{Alg}}
+
+\def\ran{\mathrm{ran}}
+\def\Ran{\mathrm{Ran}}
+\def\RAN{\textsc{Ran}}
+\def\lan{\mathrm{lan}}
+\def\Lan{\mathrm{Lan}}
+\def\LAN{\textsc{Lan}}
+\def\Yan{\mathrm{Yan}}
+\def\ryft{\mathrm{rift}}
+\def\Ryft{\mathrm{Rift}}
+\def\RYFT{\textsc{Rift}}
+\def\lyft{\mathrm{lift}}
+\def\Lyft{\mathrm{Lift}}
+\def\LYFT{\textsc{Lift}}
+\def\Nat{\textsf{Nat}}
+% ^ TODO: these two chunks can be done procedurally and extended
+
+
+\newcommand{\arXivPreprint}[1]{\href{http://arxiv.org/abs/#1}{arXiv:#1} preprint}
+
+\newlength{\seplen}
+\setlength{\seplen}{5pt}
+\newlength{\sepwid}
+\setlength{\sepwid}{.4pt}
+\def\firstblank{\,\rule{\seplen}{\sepwid}\,}
+\def\sndblank{\firstblank\llap{\raisebox{2pt}{\firstblank}}}
+
+
+\def\op{\text{op}}
+\def\co{\text{co}}
+\def\coop{\text{coop}}
+
+\newcommand{\celtag}[2][dr]{\ar[#1,white, "#2"{black,description}]}
+
+
+\let\xto\xrightarrow
+\let\xot\xleftarrow
+
+\newcommand{\rot}[3][c]{\rotatebox[origin=#1]{#2}{$#3$}}
+\newcommand{\rotarrow}[2][c]{\rot{#1}{#2}{\Rightarrow}}
+
+\newcommand{\Nearrow}{\rotarrow{45}}
+\newcommand{\Nwarrow}{\rotarrow{135}}
+\newcommand{\Searrow}{\rotarrow{-45}}
+\newcommand{\Swarrow}{\rotarrow{225}}
+\newcommand{\Sarrow}{\rotarrow{-90}}
+\newcommand{\Narrow}{\rotarrow{90}}
+
+\DeclareMathOperator{\colim}{colim}
+\DeclareMathOperator{\coker}{coker}
+\newcommand{\bsmat}{\begin{smallmatrix}}
+\newcommand{\esmat}{\end{smallmatrix}}
+
+\makeatletter
+  \def\@cite#1#2{[\textsf{#1}\if@tempswa , #2\fi]}
+  \def\@biblabel#1{[\textsf{#1}]}
+\makeatother
+
+
+\newcommand{\pto}{\mathop{\ooalign{\hfil\kern-2pt$\mapstochar$\hfil\cr\hfil$\to$\hfil}}}
+
+\usepackage{turnstile}
+\newcommand{\adjunct}[2]{\nsststile{#2}{#1}}
+
+
+\newcommand{\putbib}[2]{
+  \bibliography{#1}{}
+  \bibliographystyle{#2}
+}
+
+\usetikzlibrary{decorations.markings}
+\tikzstyle{pro} =
+  [ decoration={ markings
+               , mark = at position 0.5 with
+                   {\draw[-] (0,-1.25pt) -- (0,1.25pt);}
+               }
+  , postaction ={decorate}
+  ]
+
+\DeclareMathAlphabet{\mybb}{U}{BOONDOX-ds}{m}{n}
+
+\newcommand*{\Scale}[2][4]{\scalebox{#1}{\ensuremath{#2}}}%
+\def\lrc{
+\begin{tikzpicture}[scale=.33]
+	\draw[-] (0,0) -| (1,1);
+\end{tikzpicture}
+}
+
+\def\dopb{\begin{tikzpicture}[scale=.375] \draw (0,0) -| (1,1);\end{tikzpicture}}
+\newcommand{\xpb}[1][dr]{\ar@{}[#1]|(.375){\dopb}}
+\def\dopo{\begin{tikzpicture}[scale=.375] \draw (0,0) |- (1,1);\end{tikzpicture}}
+\newcommand{\xpo}[1][dr]{\ar@{}[#1]|(.675){\dopo}}
+
+\newcommand{\pb}{\arrow[dr, phantom, "\dopb", very near start]}
+\newcommand{\po}{\arrow[dr, phantom, "\dopo", very near end]}
+
+\def\[{\begin{equation}}
+\def\]{\end{equation}}
+% ^ this is BAD, but can't do without at this point...
+
+\newenvironment{xsmallmatrix}[1]
+{\renewcommand\thickspace{\kern#1}\smallmatrix}
+{\endsmallmatrix}
+\NewDocumentCommand{\prevar}{o m m}{
+	\IfNoValueTF{#1}{
+			\begin{smallmatrix}
+				#2 \\
+				\downarrow \\
+				#3
+			\end{smallmatrix}}
+	{
+			\begin{xsmallmatrix}{0em}
+				& #2 \\
+				#1 & \downarrow \\
+				& #3
+			\end{xsmallmatrix}}}
+\NewDocumentCommand{\var}{o m m}{
+	\IfNoValueTF{#1}{
+		\left[
+			\begin{smallmatrix}
+				#2 \\
+				\downarrow \\
+				#3
+			\end{smallmatrix}\right]}
+	{
+		\left[
+			\begin{xsmallmatrix}{0em}
+				& #2 \\
+				#1 & \downarrow \\
+				& #3
+			\end{xsmallmatrix}\right]}}
+
+\usepackage{adjustbox}
+\newenvironment{adju}[1][0.925]{%
+\begin{center}\begin{adjustbox}{max height=0.5\textheight, max width=#1\textwidth}}{\end{adjustbox}\end{center}}
+
+\newcommand{\precop}[2]{
+  \begin{smallmatrix}
+    #1 \\ #2
+  \end{smallmatrix}
+}
+\newcommand{\cop}[2]{
+  \left[\begin{smallmatrix}
+    #1 \\ #2
+  \end{smallmatrix}\right]
+}
+\def\emdash{\text{-}}
+
+\newcommand{\adja}[4]{
+  #1 : \xymatrix{#2 \ar@<.5em>[r] \ar@{}[r]|\perp & \ar@<.5em>[l] #3 } : #4
+}
+
+
+\NewDocumentCommand{\vxy}{o m}{
+  \IfNoValueTF{#1}
+  {\vcenter{\xymatrix{#2}}} % do if \vxy{bla}
+  {\vcenter{\xymatrix#1{#2}}} % do if \vxy[foo]{bla}
+}

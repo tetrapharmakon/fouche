@@ -1,0 +1,80 @@
+\DeclareOption{english}{
+\theoremstyle{definition}
+\numberwithin{equation}{section}
+\newtheorem{theorem}{Theorem}[section]
+ \defthm{corollary}{Corollary}
+ \defthm{proposition}{Proposition}
+ \defthm{lemma}{Lemma}
+ \defthm{claim}{Claim}
+ \defthm{definition}{Definition}
+ \defthm{notation}{Notation}
+ \defthm{remark}{Remark}
+ \defthm{conjecture}{Conjecture}
+ \defthm{axiom}{Axiom}
+ \defthm{example}{Example}
+ \defthm{examples}{Examples}
+ \defthm{exercise}{Exercise}
+ \defthm{counterexample}{Counterexample}
+ \defthm{construction}{Construction}
+ \defthm{warning}{Warning}
+ \defthm{digression}{Digression}
+ \defthm{perspective}{Perspective}
+ \defthm{discussion}{Discussion}
+ \defthm{terminology}{Terminology}
+ \defthm{heuristics}{Heuristics}
+ \defthm{conclusion}{Conclusion}
+}
+
+\makeatletter
+\def\renewtheorem#1{%
+  \expandafter\let\csname#1\endcsname\relax
+  \expandafter\let\csname c@#1\endcsname\relax
+  \gdef\renewtheorem@envname{#1}
+  \renewtheorem@secpar
+}
+\def\renewtheorem@secpar{\@ifnextchar[{\renewtheorem@numberedlike}{\renewtheorem@nonumberedlike}}
+\def\renewtheorem@numberedlike[#1]#2{\newtheorem{\renewtheorem@envname}[#1]{#2}}
+\def\renewtheorem@nonumberedlike#1{
+\def\renewtheorem@caption{#1}
+\edef\renewtheorem@nowithin{\noexpand\newtheorem{\renewtheorem@envname}{\renewtheorem@caption}}
+\renewtheorem@thirdpar
+}
+\def\renewtheorem@thirdpar{\@ifnextchar[{\renewtheorem@within}{\renewtheorem@nowithin}}
+\def\renewtheorem@within[#1]{\renewtheorem@nowithin[#1]}
+\makeatother
+
+\makeatletter
+\def\redefthm#1#2{%
+  \renewtheorem{#1}{#2}[section]%
+  \expandafter\def\csname #1autorefname\endcsname{#2}%
+  \expandafter\let\csname c@#1\endcsname\c@theorem}
+\makeatother
+
+\DeclareOption{italian}{
+\theoremstyle{definition}
+\numberwithin{equation}{section}
+\renewtheorem{theorem}{Teorema}[section]
+ \redefthm{corollary}{Corollario}
+ \redefthm{proposition}{Proposizione}
+ \redefthm{lemma}{Lemma}
+ \redefthm{definition}{Definizione}
+ \redefthm{notation}{Notazione}
+ \redefthm{remark}{Osservazione}
+ \redefthm{conjecture}{Congettura}
+ \redefthm{axiom}{Assioma}
+ \redefthm{example}{Esempio}
+ \redefthm{examples}{Esempi}
+ \redefthm{exercise}{Esercizio}
+ \redefthm{exercises}{Esercizi}
+ \redefthm{counterexample}{Controesempio}
+ \redefthm{construction}{Costruzione}
+ \redefthm{warning}{Caveat}
+ \redefthm{digression}{Digressione}
+ \redefthm{perspective}{Prospettiva}
+ \redefthm{discussion}{Discussione}
+ \redefthm{terminology}{Terminologia}
+ \redefthm{heuristics}{Euristica}
+}
+
+\DeclareDocumentEnvironment{enumtag}{m}{%
+	\begin{enumerate}[ label = \textsc{#1}\oldstylenums{\arabic*}), ref   = \textsc{#1}\oldstylenums{\arabic*} ] }{ \end{enumerate} }
