@@ -76,5 +76,5 @@
  \redefthm{heuristics}{Euristica}
 }
 
-\DeclareDocumentEnvironment{enumtag}{m}{%
-	\begin{enumerate}[ label = \textsc{#1}\oldstylenums{\arabic*}), ref   = \textsc{#1}\oldstylenums{\arabic*} ] }{ \end{enumerate} }
+\DeclareDocumentEnvironment{enumtag}{m O{}}{%
+	\begin{enumerate}[ label = \textsc{#1}\oldstylenums{\arabic*}), ref   = \textsc{#1}\oldstylenums{\arabic*}, #2] }{ \end{enumerate} }
