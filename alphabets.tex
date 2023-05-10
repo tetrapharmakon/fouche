@@ -1,35 +1,39 @@
 \ExplSyntaxOn
-\NewDocumentCommand{\makeabbrev}{mmm}
- {
-  \yoruk_makeabbrev:nnn { #1 } { #2 } { #3 }
- }
 
-\cs_new_protected:Npn \yoruk_makeabbrev:nnn #1 #2 #3
+\clist_new:N \g_fouche_upper_clist
+\clist_gset:Nn \g_fouche_upper_clist { A,B,C,D,E,G,H,I,J,K,L,M,N,O,P,Q,R,T,U,V,W,X,Y,Z }
+
+\clist_new:N \g_fouche_lower_clist
+\clist_gset:Nn \g_fouche_lower_clist { a,b,c,d,e,g,h,i,j,k,l,m,n,o,p,q,r,t,u,v,w,x,y,z }
+
+\clist_new:N \g_fouche_both_clist
+\clist_concat:NNN \g_fouche_both_clist \g_fouche_upper_clist \g_fouche_lower_clist
+
+\clist_new:N \g_fouche_categories_clist
+\clist_gset:Nn \g_fouche_categories_clist { Ab, Alg, Ban, BSD, Card, cat, Cat, CAT, cgHaus, Ch, CMnd, CMon, CW, Der, EM, End, Ext, fHilb, Fld, Foo, Fuk, fVect, Fzy, Gal, Grp, gVec, Haus, Het, Ho, Kl, Lat, Mag, Met, Mfd, Mnd, Mod, Mon, Ord, Par, PInj, POrd, Pre, Pro, Prof, Quot, Quux, Rel, Ring, Rot, Set, Sgp, Sp, Spec, sSet, Sub, SW, Top, Tor, Unif, Vect }
+
+\clist_new:N \g_fouche_operators_clist
+\clist_gset:Nn \g_fouche_operators_clist { lan, Lan, LAN, lft, Lft, LFT, Nat, ran, Hom, Ran, RAN, Rft, Yan,RFT, rft, op, co, coop, colim, coker, }
+
+\cs_new_protected:Npn \fouche_makeabbrev:nnN #1 #2 #3
  {
-  \clist_map_inline:nn { #3 }
+  \clist_map_inline:Nn { #3 }
    {
     \cs_new_protected:cpn { #2 } { #1 { ##1 } }
    }
  }
-\ExplSyntaxOff
+\fouche_makeabbrev:nnN { \textbf } { bf#1 } \g_fouche_both_clist
+\fouche_makeabbrev:nnN { \boldsymbol } { bs#1 } \g_fouche_both_clist
+\fouche_makeabbrev:nnN { \textsf } { sf#1 } \g_fouche_both_clist
+\fouche_makeabbrev:nnN { \mathfrak } { fk#1 } \g_fouche_both_clist
+\fouche_makeabbrev:nnN { \underline } { un#1 } \g_fouche_both_clist
 
-\makeabbrev{\textbf}{bf#1}{
-  a,b,c,d,e,g,h,i,j,k,l,m,n,o,p,q,r,t,u,v,w,x,y,z,%
-  A,B,C,D,E,G,H,I,J,K,L,M,N,O,P,Q,R,T,U,V,W,X,Y,Z }
-\makeabbrev{\boldsymbol}{bs#1}{%
-    a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,%
-    A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z }
-\makeabbrev{\mathsf}{sf#1}{
-  a,b,c,d,e,f,g,h,i,j,k,l,m,o,p,q,r,s,t,u,v,w,x,y,z,%
-  A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z }
-\makeabbrev{\mathfrak}{fk#1}{
-  a,b,c,d,e,f,g,h,j,k,i,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,%
-  A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z }
-\makeabbrev{\mathcal}{cl#1}{
-  A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z }
-\makeabbrev{\mathbb}{bb#1}{
-  A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z }
-\makeabbrev{\underline}{un#1}{
-  a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,
-  A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z }
-\makeabbrev{\mathsf}{#1}{ VorCat, CAT, Prof, Alg, Set, Ab, Grp, Top, Vect, sSet, Ch, Mfd, Mod }
+\fouche_makeabbrev:nnN { \mathcal } { cl#1 } \g_fouche_upper_clist
+\fouche_makeabbrev:nnN { \mathbb } { bb#1 } \g_fouche_upper_clist
+
+\fouche_makeabbrev:nnN { \textsf } { #1 } \g_fouche_categories_clist
+\fouche_makeabbrev:nnN { \mathrm } { #1 } \g_fouche_operators_clist
+
+\DeclareMathAlphabet{\mybb}{U}{BOONDOX-ds}{m}{n}
+\fouche_makeabbrev:nnN { \mybb } { mb#1 } \g_fouche_lower_clist
+\ExplSyntaxOff

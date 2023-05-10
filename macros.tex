@@ -1,24 +1,5 @@
 \def\To{\Rightarrow}
 
-\def\cate#1{\textsf{#1}}
-
-\def\ran{\mathrm{ran}}
-\def\Ran{\mathrm{Ran}}
-\def\RAN{\textsc{Ran}}
-\def\lan{\mathrm{lan}}
-\def\Lan{\mathrm{Lan}}
-\def\LAN{\textsc{Lan}}
-\def\Yan{\mathrm{Yan}}
-\def\ryft{\mathrm{rift}}
-\def\Ryft{\mathrm{Rift}}
-\def\RYFT{\textsc{Rift}}
-\def\lyft{\mathrm{lift}}
-\def\Lyft{\mathrm{Lift}}
-\def\LYFT{\textsc{Lift}}
-\def\Nat{\textsf{Nat}}
-% ^ TODO: these two chunks can be done procedurally and extended
-
-
 \newcommand{\arXivPreprint}[1]{\href{http://arxiv.org/abs/#1}{arXiv:#1} preprint}
 
 \newlength{\seplen}
@@ -27,11 +8,6 @@
 \setlength{\sepwid}{.4pt}
 \def\firstblank{\,\rule{\seplen}{\sepwid}\,}
 \def\sndblank{\firstblank\llap{\raisebox{2pt}{\firstblank}}}
-
-
-\def\op{\text{op}}
-\def\co{\text{co}}
-\def\coop{\text{coop}}
 
 \newcommand{\celtag}[2][dr]{\ar[#1,white, "#2"{black,description}]}
 
@@ -49,8 +25,6 @@
 \newcommand{\Sarrow}{\rotarrow{-90}}
 \newcommand{\Narrow}{\rotarrow{90}}
 
-\DeclareMathOperator{\colim}{colim}
-\DeclareMathOperator{\coker}{coker}
 \newcommand{\bsmat}{\begin{smallmatrix}}
 \newcommand{\esmat}{\end{smallmatrix}}
 
@@ -65,7 +39,6 @@
 \usepackage{turnstile}
 \newcommand{\adjunct}[2]{\nsststile{#2}{#1}}
 
-
 \newcommand{\putbib}[2]{
   \bibliography{#1}{}
   \bibliographystyle{#2}
@@ -79,8 +52,6 @@
                }
   , postaction ={decorate}
   ]
-
-\DeclareMathAlphabet{\mybb}{U}{BOONDOX-ds}{m}{n}
 
 \newcommand*{\Scale}[2][4]{\scalebox{#1}{\ensuremath{#2}}}%
 \def\lrc{
@@ -104,6 +75,7 @@
 \newenvironment{xsmallmatrix}[1]
 {\renewcommand\thickspace{\kern#1}\smallmatrix}
 {\endsmallmatrix}
+
 \NewDocumentCommand{\prevar}{o m m}{
 	\IfNoValueTF{#1}{
 			\begin{smallmatrix}
@@ -117,37 +89,37 @@
 				#1 & \downarrow \\
 				& #3
 			\end{xsmallmatrix}}}
-\NewDocumentCommand{\var}{o m m}{
-	\IfNoValueTF{#1}{
-		\left[
-			\begin{smallmatrix}
-				#2 \\
-				\downarrow \\
-				#3
-			\end{smallmatrix}\right]}
-	{
-		\left[
-			\begin{xsmallmatrix}{0em}
-				& #2 \\
-				#1 & \downarrow \\
-				& #3
-			\end{xsmallmatrix}\right]}}
+
+\ExplSyntaxOn
+\NewDocumentCommand{\var}{o m O{s} m}{
+	\str_case:nn { #3 } {
+		{r}{\left( \prevar[#1]{#2}{#4}\right)}
+		{s}{\left[ \prevar[#1]{#2}{#4}\right]}
+		{c}{\left\{ \prevar[#1]{#2}{#4}\right\}}
+		{a}{\left\langle \prevar[#1]{#2}{#4}\right\rangle}
+	}}
+	\newcommand{\precop}[2]{
+		\begin{smallmatrix}
+			#1 \\ #2
+		\end{smallmatrix}
+	}
+	\NewDocumentCommand{\cop}{O{r} m m}{
+		\str_case:nn { #1 } {
+			{r}{\left( \precop{#2}{#3}\right)}
+			{s}{\left[ \precop{#2}{#3}\right]}
+			{c}{\left\{ \precop{#2}{#3}\right\}}
+			{a}{\left\langle \precop{#2}{#3}\right\rangle}
+		}}
+
+\ExplSyntaxOff
 
 \usepackage{adjustbox}
 \newenvironment{adju}[1][0.925]{%
 \begin{center}\begin{adjustbox}{max height=0.5\textheight, max width=#1\textwidth}}{\end{adjustbox}\end{center}}
 
-\newcommand{\precop}[2]{
-  \begin{smallmatrix}
-    #1 \\ #2
-  \end{smallmatrix}
-}
-\newcommand{\cop}[2]{
-  \left[\begin{smallmatrix}
-    #1 \\ #2
-  \end{smallmatrix}\right]
-}
 \def\emdash{\text{-}}
+\NewDocumentCommand{\VCat}{ O{\clV} }{#1\emdash\Cat}
+\def\twoCat{\VCat[2]}
 
 \newcommand{\adja}[4]{
   #1 : \xymatrix{#2 \ar@<.5em>[r] \ar@{}[r]|\perp & \ar@<.5em>[l] #3 } : #4
