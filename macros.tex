@@ -131,3 +131,9 @@
   {\vcenter{\xymatrix{#2}}} % do if \vxy{bla}
   {\vcenter{\xymatrix#1{#2}}} % do if \vxy[foo]{bla}
 }
+
+\newcommand{\de}{\partial}
+\NewDocumentCommand{\FMly}{ O{} }{\IfNoValueTF{#1}{F\emdash\Mly}{F^{#1}\emdash\Mly}}
+\NewDocumentCommand{\FMre}{ O{} }{\IfNoValueTF{#1}{F\emdash\Mre}{F^{#1}\emdash\Mre}}
+\newcommand{\dMly}{\de\emdash\Mly}
+\newcommand{\dMre}{\de\emdash\Mre}
