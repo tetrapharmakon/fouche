@@ -533,7 +533,7 @@
 \def\mailsymbol{\textcolor{lipicsGray}{\fontsize{9}{12}\sffamily\bfseries @}}%
 \def\homesymbol{\textcolor{lipicsGray}{\fontsize{9}{12}\sffamily\bfseries H}}%
 }%
-\RequirePackage[T1]{fontenc}
+\RequirePackage[LGR,T1]{fontenc}
 \RequirePackage{textcomp}
 \RequirePackage[mathscr]{eucal}
 \RequirePackage{amssymb}
