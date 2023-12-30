@@ -8,11 +8,11 @@ Testing for \texttt{fouche.sty}
 \subsection{Upper and lowercase alphabets}
 \ExplSyntaxOn
 \begin{itemize}
-\clist_map_inline:nn { bf,bs,sf,fk,un,mb } {
-  \item \clist_map_inline:Nn \g_fouche_both_clist {
-    $\csname#1##1\endcsname$
-  }
-}
+	\clist_map_inline:nn { bf,bs,sf,fk,un,mb } {
+	\item \clist_map_inline:Nn \g_fouche_both_clist {
+		      $\csname#1##1\endcsname$
+	      }
+	      }
 \end{itemize}
 % \begin{itemize}
 %   \foreach \j in {bf,bs,sf,fk,un}{%
@@ -26,28 +26,28 @@ Testing for \texttt{fouche.sty}
 \subsection{Only uppercase alphabets}
 \ExplSyntaxOn
 \begin{itemize}
-  \clist_map_inline:nn { cl,bb } {
-    \item \clist_map_inline:Nn \g_fouche_upper_clist {
-      $\csname#1##1\endcsname$
-      }
-      }
-    \end{itemize}
+	\clist_map_inline:nn { cl,bb } {
+	\item \clist_map_inline:Nn \g_fouche_upper_clist {
+		      $\csname#1##1\endcsname$
+	      }
+	      }
+\end{itemize}
 \ExplSyntaxOff
 \subsection{Categories}
 \ExplSyntaxOn
 \begin{itemize}
-    \item \clist_map_inline:Nn \g_fouche_categories_clist {
-      $\csname#1\endcsname$~
-      }
-    \end{itemize}
+	\item \clist_map_inline:Nn \g_fouche_categories_clist {
+		      $\csname#1\endcsname$~
+	      }
+\end{itemize}
 \ExplSyntaxOff
 \subsection{Operators}
 \ExplSyntaxOn
 \begin{itemize}
-    \item \clist_map_inline:Nn \g_fouche_operators_clist {
-      $\csname#1\endcsname$~
-      }
-    \end{itemize}
+	\item \clist_map_inline:Nn \g_fouche_operators_clist {
+		      $\csname#1\endcsname$~
+	      }
+\end{itemize}
 \ExplSyntaxOff
 % \foreach \j in {  Ab, Alg, Ban, BSD, Card, cat, Cat, CAT, cgHaus, Ch, CMnd, CMon, CW, Der, EM, End, Ext, fHilb, Fld, Foo, Fuk, fVect, Fzy, Gal, Grp, gVec, Haus, Het, Ho, Hom, Kl, Lat, Mag, Met, Mfd, Mnd, Mod, Mon, Ord, Par, PInj, POrd, Pre, Pro, Prof, Quot, Quux, Rel, Ring, Rot, Set, Sgp, Sp, Spec, sSet, Sub, SW, Top, Tor, Unif, Vect}{%
 %       $\csname\j\endcsname$, %
@@ -60,23 +60,23 @@ Testing for \texttt{fouche.sty}
 %     }%
 \section{Macros}
 \begin{itemize}
-  \item $\var{A}{B}$%
-  ,     $\var[f]{A}{B}$%
-  ,     $\var{A}[r]{B}$%
-  ,     $\var{A}[s]{B}$%
-  ,     $\var{A}[c]{B}$%
-  ,     $\var{A}[a]{B}$%
-  ,     $\var[f]{A}[r]{B}$%
-  ,     $\var[f]{A}[s]{B}$%
-  ,     $\var[f]{A}[c]{B}$%
-  ,     $\var[f]{A}[a]{B}$.
+	\item $\var{A}{B}$%
+	      ,     $\var[f]{A}{B}$%
+	      ,     $\var{A}[r]{B}$%
+	      ,     $\var{A}[s]{B}$%
+	      ,     $\var{A}[c]{B}$%
+	      ,     $\var{A}[a]{B}$%
+	      ,     $\var[f]{A}[r]{B}$%
+	      ,     $\var[f]{A}[s]{B}$%
+	      ,     $\var[f]{A}[c]{B}$%
+	      ,     $\var[f]{A}[a]{B}$.
 \end{itemize}
 \begin{itemize}
-  \item $\cop{A}{B}$%
-  ,     $\cop[r]{A}{B}$%
-  ,     $\cop[s]{A}{B}$%
-  ,     $\cop[c]{A}{B}$%
-  ,     $\cop[a]{A}{B}$%
+	\item $\cop{A}{B}$%
+	      ,     $\cop[r]{A}{B}$%
+	      ,     $\cop[s]{A}{B}$%
+	      ,     $\cop[c]{A}{B}$%
+	      ,     $\cop[a]{A}{B}$%
 \end{itemize}
 $\VCat$, $\VCat[\clW]$, $\twoCat$.
 \section{Environments}

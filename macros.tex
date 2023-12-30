@@ -26,11 +26,11 @@
 \newcommand{\Narrow}{\rotarrow{90}}
 
 \newcommand{\bsmat}{\begin{smallmatrix}}
-\newcommand{\esmat}{\end{smallmatrix}}
+		\newcommand{\esmat}{\end{smallmatrix}}
 
 \makeatletter
-  \def\@cite#1#2{[\textsf{#1}\if@tempswa , #2\fi]}
-  \def\@biblabel#1{[\textsf{#1}]}
+\def\@cite#1#2{[\textsf{#1}\if@tempswa , #2\fi]}
+\def\@biblabel#1{[\textsf{#1}]}
 \makeatother
 
 
@@ -40,24 +40,24 @@
 \newcommand{\adjunct}[2]{\nsststile{#2}{#1}}
 
 \newcommand{\putbib}[2]{
-  \bibliography{#1}{}
-  \bibliographystyle{#2}
+	\bibliography{#1}{}
+	\bibliographystyle{#2}
 }
 
 \usetikzlibrary{decorations.markings}
 \tikzstyle{pro} =
-  [ decoration={ markings
-               , mark = at position 0.5 with
-                   {\draw[-] (0,-1.25pt) -- (0,1.25pt);}
-               }
-  , postaction ={decorate}
-  ]
+[ decoration={ markings
+		, mark = at position 0.5 with
+			{\draw[-] (0,-1.25pt) -- (0,1.25pt);}
+	}
+, postaction ={decorate}
+]
 
 \newcommand*{\Scale}[2][4]{\scalebox{#1}{\ensuremath{#2}}}%
 \def\lrc{
-\begin{tikzpicture}[scale=.33]
-	\draw[-] (0,0) -| (1,1);
-\end{tikzpicture}
+	\begin{tikzpicture}[scale=.33]
+		\draw[-] (0,0) -| (1,1);
+	\end{tikzpicture}
 }
 
 \def\dopb{\begin{tikzpicture}[scale=.375] \draw (0,0) -| (1,1);\end{tikzpicture}}
@@ -69,7 +69,7 @@
 \newcommand{\po}{\arrow[dr, phantom, "\dopo", very near end]}
 
 \def\[{\begin{equation}}
-\def\]{\end{equation}}
+			\def\]{\end{equation}}
 % ^ this is BAD, but can't do without at this point...
 
 \newenvironment{xsmallmatrix}[1]
@@ -78,58 +78,58 @@
 
 \NewDocumentCommand{\prevar}{o m m}{
 	\IfNoValueTF{#1}{
-			\begin{smallmatrix}
-				#2 \\
-				\downarrow \\
-				#3
-			\end{smallmatrix}}
+		\begin{smallmatrix}
+			#2 \\
+			\downarrow \\
+			#3
+		\end{smallmatrix}}
 	{
-			\begin{xsmallmatrix}{0em}
-				& #2 \\
-				#1 & \downarrow \\
-				& #3
-			\end{xsmallmatrix}}}
+		\begin{xsmallmatrix}{0em}
+			& #2 \\
+			#1 & \downarrow \\
+			& #3
+		\end{xsmallmatrix}}}
 
 \ExplSyntaxOn
 \NewDocumentCommand{\var}{o m O{s} m}{
 	\str_case:nn { #3 } {
 		{r}{\left( \prevar[#1]{#2}{#4}\right)}
-		{s}{\left[ \prevar[#1]{#2}{#4}\right]}
-		{c}{\left\{ \prevar[#1]{#2}{#4}\right\}}
-		{a}{\left\langle \prevar[#1]{#2}{#4}\right\rangle}
+			{s}{\left[ \prevar[#1]{#2}{#4}\right]}
+			{c}{\left\{ \prevar[#1]{#2}{#4}\right\}}
+			{a}{\left\langle \prevar[#1]{#2}{#4}\right\rangle}
 	}}
 \newcommand{\precop}[2]{
-		\begin{smallmatrix}
-			#1 \\ #2
-		\end{smallmatrix}
-	}
-	\NewDocumentCommand{\cop}{O{r} m m}{
-		\str_case:nn { #1 } {
-			{r}{\left( \precop{#2}{#3}\right)}
+	\begin{smallmatrix}
+		#1 \\ #2
+	\end{smallmatrix}
+}
+\NewDocumentCommand{\cop}{O{r} m m}{
+	\str_case:nn { #1 } {
+		{r}{\left( \precop{#2}{#3}\right)}
 			{s}{\left[ \precop{#2}{#3}\right]}
 			{c}{\left\{ \precop{#2}{#3}\right\}}
 			{a}{\left\langle \precop{#2}{#3}\right\rangle}
-		}}
+	}}
 
 \ExplSyntaxOff
 
 \usepackage{adjustbox}
 \newenvironment{adju}[1][0.925]{%
-\begin{center}\begin{adjustbox}{max height=0.5\textheight, max width=#1\textwidth}}{\end{adjustbox}\end{center}}
+	\begin{center}\begin{adjustbox}{max height=0.5\textheight, max width=#1\textwidth}}{\end{adjustbox}\end{center}}
 
 \def\emdash{\text{-}}
 \NewDocumentCommand{\VCat}{ O{\clV} }{#1\emdash\Cat}
 \def\twoCat{\VCat[2]}
 
 \newcommand{\adja}[4]{
-  #1 : \xymatrix{#2 \ar@<.5em>[r] \ar@{}[r]|\perp & \ar@<.5em>[l] #3 } : #4
+	#1 : \xymatrix{#2 \ar@<.5em>[r] \ar@{}[r]|\perp & \ar@<.5em>[l] #3 } : #4
 }
 
 
 \NewDocumentCommand{\vxy}{o m}{
-  \IfNoValueTF{#1}
-  {\vcenter{\xymatrix{#2}}} % do if \vxy{bla}
-  {\vcenter{\xymatrix#1{#2}}} % do if \vxy[foo]{bla}
+	\IfNoValueTF{#1}
+	{\vcenter{\xymatrix{#2}}} % do if \vxy{bla}
+	{\vcenter{\xymatrix#1{#2}}} % do if \vxy[foo]{bla}
 }
 
 \newcommand{\de}{\partial}

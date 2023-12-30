@@ -16,12 +16,12 @@
 \clist_gset:Nn \g_fouche_operators_clist { lan, Lan, LAN, lft, Lft, LFT, ran, Hom, Ran, RAN, Rft, Yan, RFT, rft, op, co, coop, colim, coker, }
 
 \cs_new_protected:Npn \fouche_makeabbrev:nnN #1 #2 #3
- {
-  \clist_map_inline:Nn { #3 }
-   {
-    \cs_new_protected:cpn { #2 } { #1 { ##1 } }
-   }
- }
+{
+	\clist_map_inline:Nn { #3 }
+	{
+		\cs_new_protected:cpn { #2 } { #1 { ##1 } }
+	}
+}
 \fouche_makeabbrev:nnN { \textbf } { bf#1 } \g_fouche_both_clist
 \fouche_makeabbrev:nnN { \boldsymbol } { bs#1 } \g_fouche_both_clist
 \fouche_makeabbrev:nnN { \textsf } { sf#1 } \g_fouche_both_clist

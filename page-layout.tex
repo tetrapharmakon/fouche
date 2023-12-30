@@ -7,18 +7,18 @@
 
 \makeatletter
 \def\defthm#1#2{%
-  \newtheorem{#1}{#2}[section]%
-  \expandafter\def\csname #1autorefname\endcsname{#2}%
-  \expandafter\let\csname c@#1\endcsname\c@theorem}
+	\newtheorem{#1}{#2}[section]%
+	\expandafter\def\csname #1autorefname\endcsname{#2}%
+	\expandafter\let\csname c@#1\endcsname\c@theorem}
 \makeatother
 
 \tcbuselibrary{most}
 \tcolorboxenvironment%
-  {quote}{ blanker
-         , before skip=10pt
-         , after skip=10pt
-         , borderline west={6mm}{5pt}{gray!15}
-         , breakable
-         }
+{quote}{ blanker
+	, before skip=10pt
+	, after skip=10pt
+	, borderline west={6mm}{5pt}{gray!15}
+	, breakable
+}
 
 \setcounter{tocdepth}{1}
