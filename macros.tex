@@ -117,6 +117,10 @@
 \newenvironment{adju}[1][0.925]{%
 	\begin{center}\begin{adjustbox}{max height=0.5\textheight, max width=#1\textwidth}}{\end{adjustbox}\end{center}}
 
+\newenvironment{bareadju}[1][0.925]{%
+	\begin{adjustbox}{max height=0.5\textheight, max width=#1\textwidth}}{\end{adjustbox}}
+
+
 \def\emdash{\text{-}}
 \NewDocumentCommand{\VCat}{ O{\clV} }{#1\emdash\Cat}
 \def\twoCat{\VCat[2]}
