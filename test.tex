@@ -1,7 +1,7 @@
 \documentclass{article}
 
 \usepackage{fouche}
-
+\usepackage{lipsum}
 \begin{document}
 Testing for \texttt{fouche.sty}
 \section{Alphabets}
@@ -14,15 +14,19 @@ Testing for \texttt{fouche.sty}
 	      }
 	      }
 \end{itemize}
-% \begin{itemize}
-%   \foreach \j in {bf,bs,sf,fk,un}{%
-%     \item \foreach \i in { \clist_use:Nn \g_fouche_both_clist { , } }{
-%       $\csname\j\i\endcsname$,%
-%     }%
-%   }
-% \end{itemize}
-\ExplSyntaxOff
 
+\ExplSyntaxOff
+\subsection{Non Latin alphabets}
+\ExplSyntaxOn
+\begin{itemize}
+	\clist_map_inline:nn { bs } {
+	\item \clist_map_inline:Nn \g_fouche_greek_clist {
+		      $\csname#1##1\endcsname$
+	      }
+	      }
+\end{itemize}
+
+\ExplSyntaxOff
 \subsection{Only uppercase alphabets}
 \ExplSyntaxOn
 \begin{itemize}
@@ -80,16 +84,80 @@ Testing for \texttt{fouche.sty}
 \end{itemize}
 $\VCat$, $\VCat[\clW]$, $\twoCat$.
 \section{Environments}
-
-\section{Bibliography}
-\nocite{*}
-(TODO: A few references printed in different styles)
-\bibliographystyle{amsalpha}
-\bibliography{refs}
-
-% \bibliography{refs}
-% \bibliographystyle{amsalpha}
-
-% \bibliography{refs}
-% \bibliographystyle{amsalpha}
+\begin{theorem}
+\lipsum[1]
+\end{theorem}
+\begin{corollary}
+\lipsum[1]
+\end{corollary}
+\begin{proposition}
+\lipsum[1]
+\end{proposition}
+\begin{lemma}
+\lipsum[1]
+\end{lemma}
+\begin{claim}
+\lipsum[1]
+\end{claim}
+\begin{question}
+\lipsum[1]
+\end{question}
+\begin{definition}
+\lipsum[1]
+\end{definition}
+\begin{notation}
+\lipsum[1]
+\end{notation}
+\begin{remark}
+\lipsum[1]
+\end{remark}
+\begin{conjecture}
+\lipsum[1]
+\end{conjecture}
+\begin{axiom}
+\lipsum[1]
+\end{axiom}
+\begin{example}
+\lipsum[1]
+\end{example}
+\begin{problem}
+\lipsum[1]
+\end{problem}
+\begin{examples}
+\lipsum[1]
+\end{examples}
+\begin{exercise}
+\lipsum[1]
+\end{exercise}
+\begin{counterexample}
+\lipsum[1]
+\end{counterexample}
+\begin{construction}
+\lipsum[1]
+\end{construction}
+\begin{warning}
+\lipsum[1]
+\end{warning}
+\begin{digression}
+\lipsum[1]
+\end{digression}
+\begin{perspective}
+\lipsum[1]
+\end{perspective}
+\begin{discussion}
+\lipsum[1]
+\end{discussion}
+\begin{terminology}
+\lipsum[1]
+\end{terminology}
+\begin{heuristics}
+\lipsum[1]
+\end{heuristics}
+\begin{conclusion}
+\lipsum[1]
+\end{conclusion}
+\begin{enumtag}{xyz}
+\item \lipsum[1]
+\end{enumtag}
+$\bsalpha$
 \end{document}

@@ -6,11 +6,14 @@
 \clist_new:N \g_fouche_lower_clist
 \clist_gset:Nn \g_fouche_lower_clist { a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z }
 
+\clist_new:N \g_fouche_greek_clist
+\clist_gset:Nn \g_fouche_greek_clist { alpha,beta,gamma,delta,epsilon,zeta,eta,theta,iota,kappa,lambda,mu,nu,xi,pi,rho, sigma,tau,upsilon,phi,chi,psi,omega,varphi,varpi,varepsilon,varrho,vartheta,Gamma,Delta,Theta,Lambda,Xi,Pi,Sigma,Upsilon,Phi,Chi,Psi,Omega }
+
 \clist_new:N \g_fouche_both_clist
 \clist_concat:NNN \g_fouche_both_clist \g_fouche_upper_clist \g_fouche_lower_clist
 
 \clist_new:N \g_fouche_categories_clist
-\clist_gset:Nn \g_fouche_categories_clist { Ab, Alg, Ban, BSD, Card, cat, Cat, Bij, CAT, cgHaus, Ch, CMnd, CMon, Comon, CW, Der, EM, End, Ext, Fin, fHilb, Fld, Foo, Fuk, fVect, Fzy, Gal, Grp, gVec, Haus, Het, Ho, Kl, Lat, Mag, coAlg, KSW, Mac, Met, Mfd, Mnd, Mod, Mly, Mre, Acc, Mon, Ord, Par, PInj, POrd, Pre, Pro, Prof, Quot, Quux, Rel, Ring, Rot, Set, Sgp, Sp, Spec, sSet, Sub, SW, Top, Tor, Unif, Vect, ArithCat, AbCat, SAbCat }
+\clist_gset:Nn \g_fouche_categories_clist { Ab, Alg, Ban, BSD, Card, cat, Cat, Bij, CAT, cgHaus, Ch, CMnd, CMon, Comon, CW, Der, EM, End, Ext, Fin, fHilb, Fld, Foo, Fuk, fVect, Fzy, Gal, Grp, gVec, Nat, Haus, Het, Ho, Kl, Lat, Mag, coAlg, KSW, Mac, Met, Mfd, Mnd, Mod, Mly, Mre, Acc, Mon, Ord, Par, PInj, POrd, Pre, Pro, Prof, Quot, Quux, Rel, Ring, Rot, Set, Sgp, Sp, Spec, sSet, Sub, SW, Top, Tor, Unif, Vect, ArithCat, AbCat, SAbCat, Span, coSpan }
 
 \clist_new:N \g_fouche_operators_clist
 \clist_gset:Nn \g_fouche_operators_clist { lan, Lan, LAN, lft, Lft, LFT, ran, Hom, Ran, RAN, Rft, Yan, RFT, rft, op, co, coop, colim, coker, }
@@ -22,6 +25,15 @@
 		\cs_new_protected:cpn { #2 } { #1 { ##1 } }
 	}
 }
+
+\cs_new_protected:Npn \fouche_make_macro_abbrev:nnN #1 #2 #3
+{
+	\clist_map_inline:Nn { #3 }
+	{
+		\cs_new_protected:cpn { #2 } { #1 { \csname ##1\endcsname } }
+	}
+}
+
 \fouche_makeabbrev:nnN { \textbf } { bf#1 } \g_fouche_both_clist
 \fouche_makeabbrev:nnN { \boldsymbol } { bs#1 } \g_fouche_both_clist
 \fouche_makeabbrev:nnN { \mathsf } { sf#1 } \g_fouche_both_clist
@@ -36,4 +48,6 @@
 
 \DeclareMathAlphabet{\mybb}{U}{BOONDOX-ds}{m}{n}
 \fouche_makeabbrev:nnN { \mybb } { mb#1 } \g_fouche_lower_clist
+
+\fouche_make_macro_abbrev:nnN { \boldsymbol } { bs#1 } \g_fouche_greek_clist
 \ExplSyntaxOff
