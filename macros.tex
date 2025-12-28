@@ -1,154 +1,295 @@
-\def\To{\Rightarrow}
+%================================================
+% Logical symbols and arrows
+%================================================
+\NewDocumentCommand{\To}{}{\Rightarrow}
 
-\newcommand{\arXivPreprint}[1]{\href{http://arxiv.org/abs/#1}{arXiv:#1} preprint}
+\let\xto\xrightarrow
+\let\xot\xleftarrow
 
+\NewDocumentCommand{\id}{}{\text{id}}
+
+%================================================
+% Hyperlinks and bibliographic helpers
+%================================================
+\NewDocumentCommand{\arXivPreprint}{m}{
+  \href{http://arxiv.org/abs/#1}{arXiv:#1} preprint
+}
+
+\NewDocumentCommand{\putbib}{m m}{
+  \bibliography{#1}{}
+  \bibliographystyle{#2}
+}
+
+%================================================
+% Spacing / blanks
+%================================================
 \newlength{\seplen}
 \setlength{\seplen}{5pt}
 \newlength{\sepwid}
 \setlength{\sepwid}{.4pt}
-\def\firstblank{\,\rule{\seplen}{\sepwid}\,}
-\def\sndblank{\firstblank\llap{\raisebox{2pt}{\firstblank}}}
 
-\newcommand{\celtag}[2][dr]{\ar[#1,white, "#2"{black,description}]}
+\NewDocumentCommand{\blank}{}{
+  \,\rule{\seplen}{\sepwid}\,
+}
+\NewDocumentCommand{\bblank}{}{
+  \blank\llap{\raisebox{2pt}{\blank}}
+}
 
-\def\id{\text{id}}
-\let\xto\xrightarrow
-\let\xot\xleftarrow
+%================================================
+% Category-theoretic typography
+%================================================
+\NewDocumentCommand{\cate}{m}{\mathsf{#1}}
 
-\newcommand{\rot}[3][c]{\rotatebox[origin=#1]{#2}{$#3$}}
-\newcommand{\rotarrow}[2][c]{\rot{#1}{#2}{\Rightarrow}}
+\NewDocumentCommand{\emdash}{}{\text{-}}
 
-\newcommand{\Nearrow}{\rotarrow{45}}
-\newcommand{\Nwarrow}{\rotarrow{135}}
-\newcommand{\Searrow}{\rotarrow{-45}}
-\newcommand{\Swarrow}{\rotarrow{225}}
-\newcommand{\Sarrow}{\rotarrow{-90}}
-\newcommand{\Narrow}{\rotarrow{90}}
+\NewDocumentCommand{\VCat}{ O{\clV} }{#1\emdash\Cat}
+\NewDocumentCommand{\twoCat}{}{\VCat[2]}
 
-\newcommand{\bsmat}{\begin{smallmatrix}}
-\newcommand{\esmat}{\end{smallmatrix}}
+\NewDocumentCommand{\opid}{m}{#1^\op \times #1}
 
-% \makeatletter
-% \def\@cite#1#2{[\textsf{#1}\if@tempswa , #2\fi]}
-% \def\@biblabel#1{[\textsf{#1}]}
-% \makeatother
-\def\cate#1{\mathsf{#1}}
+%================================================
+% Rotations and directional arrows
+%================================================
+\NewDocumentCommand{\rot}{ O{c} m m }{
+  \rotatebox[origin=#1]{#2}{$#3$}
+}
 
-\newcommand{\pto}{\mathop{\ooalign{\hfil\kern-2pt$\mapstochar$\hfil\cr\hfil$\longrightarrow$\hfil}}}
+\NewDocumentCommand{\rotarrow}{ O{c} m }{
+  \rot[#1]{#2}{\Rightarrow}
+}
 
+\NewDocumentCommand{\Nearrow}{}{\rotarrow{45}}
+\NewDocumentCommand{\Nwarrow}{}{\rotarrow{135}}
+\NewDocumentCommand{\Searrow}{}{\rotarrow{-45}}
+\NewDocumentCommand{\Swarrow}{}{\rotarrow{225}}
+\NewDocumentCommand{\Sarrow}{}{\rotarrow{-90}}
+\NewDocumentCommand{\Narrow}{}{\rotarrow{90}}
+
+%================================================
+% Matrix helpers
+%================================================
+\NewDocumentCommand{\bsmat}{}{\begin{smallmatrix}}
+\NewDocumentCommand{\esmat}{}{\end{smallmatrix}}
+
+\NewDocumentEnvironment{xsmallmatrix}{m}
+  {\renewcommand\thickspace{\kern#1}\smallmatrix}
+  {\endsmallmatrix}
+
+%================================================
+% Partial maps
+%================================================
+\NewDocumentCommand{\pto}{}{
+  \mathop{
+    \ooalign{
+      \hfil\kern-2pt$\mapstochar$\hfil\cr
+      \hfil$\longrightarrow$\hfil
+    }
+  }
+}
+
+%================================================
+% Turnstiles and adjunctions
+%================================================
 \usepackage{turnstile}
-\newcommand{\adjunct}[2]{\nsststile{#2}{#1}}
 
-\newcommand{\putbib}[2]{
-	\bibliography{#1}{}
-	\bibliographystyle{#2}
+\NewDocumentCommand{\adjunct}{m m}{
+  \nsststile{#2}{#1}
 }
 
+\NewDocumentCommand{\adja}{m m m m}{
+  #1 : \xymatrix{
+    #2 \ar@<.5em>[r] \ar@{}[r]|\perp &
+    \ar@<.5em>[l] #3
+  } : #4
+}
+
+%================================================
+% TikZ / XY infrastructure
+%================================================
 \usetikzlibrary{decorations.markings}
-\tikzstyle{pro} =
-[ decoration={ markings
-		, mark = at position 0.5 with
-			{\draw[-] (0,-1.25pt) -- (0,1.25pt);}
-	}
-, postaction ={decorate}
-]
 
-\newcommand*{\Scale}[2][4]{\scalebox{#1}{\ensuremath{#2}}}%
-\def\lrc{
-	\begin{tikzpicture}[scale=.33]
-		\draw[-] (0,0) -| (1,1);
-	\end{tikzpicture}
+\tikzset{
+  pro/.style={
+    decoration={
+      markings,
+      mark=at position 0.5 with {
+        \draw[-] (0,-1.25pt) -- (0,1.25pt);
+      }
+    },
+    postaction={decorate}
+  }
 }
-\makeatletter
-\def\dopb{{\begin{tikzpicture}[scale=.375] \draw (0,0) -| (1,1);\end{tikzpicture}}}
-\NewDocumentCommand{\xpb}{ O{dr} }{\ar@{}[#1]|(.375){\dopb}}
-\def\dopo{{\begin{tikzpicture}[scale=.375] \draw (0,0) |- (1,1);\end{tikzpicture}}}
-\NewDocumentCommand{\xpo}{ O{dr} }{\ar@{}[#1]|(.675){\dopo}}
-\makeatother
 
-\newcommand{\pb}{\arrow[dr, phantom, "\dopb", very near start]}
-\newcommand{\po}{\arrow[dr, phantom, "\dopo", very near end]}
+\NewDocumentCommand{\Scale}{ O{4} m }{
+  \scalebox{#1}{\ensuremath{#2}}
+}
 
-\def\[{\begin{equation}}
-\def\]{\end{equation}}
-% ^ this is BAD, but can't do without at this point...
+%================================================
+% Pullbacks / pushouts (TikZ glyphs)
+%================================================
 
-\newenvironment{xsmallmatrix}[1]
-{\renewcommand\thickspace{\kern#1}\smallmatrix}
-{\endsmallmatrix}
+% \makeatother
 
-\NewDocumentCommand{\prevar}{o m m}{
-	\IfNoValueTF{#1}{
-		\begin{smallmatrix}
-			#2 \\
-			\downarrow \\
-			#3
-		\end{smallmatrix}}
-	{
-		\begin{xsmallmatrix}{0em}
-			& #2 \\
-			#1 & \downarrow \\
-			& #3
-		\end{xsmallmatrix}}}
+\NewDocumentCommand{\dopb}{}{
+  \begin{tikzpicture}[scale=.375]
+    \draw (0,0) -| (1,1);
+  \end{tikzpicture}
+}
+
+\NewDocumentCommand{\dopo}{}{
+  \begin{tikzpicture}[scale=.375]
+    \draw (0,0) |- (1,1);
+  \end{tikzpicture}
+}
+
+\NewDocumentCommand{\xpb}{ O{dr} }{
+  \ar@{}[#1]|(.375){\dopb}
+}
+
+\NewDocumentCommand{\xpo}{ O{dr} }{
+  \ar@{}[#1]|(.675){\dopo}
+}
+
+\NewDocumentCommand{\pb}{}{
+  \arrow[dr, phantom, "\dopb", very near start]
+}
+
+\NewDocumentCommand{\po}{}{
+  \arrow[dr, phantom, "\dopo", very near end]
+}
+
+% comma & cocomma objects; in general, ways to put a `something' inside a corner
+\NewDocumentCommand{\doco}{ O{\nearrow} }{%
+	\begin{tikzpicture}[scale=.375]
+		\draw[-] (0,0) -| (1,1);
+		\node[font=\footnotesize] at (.5,.45) {#1};
+	\end{tikzpicture}%
+}
+\NewDocumentCommand{\docc}{ O{\nearrow} }{%
+	\begin{tikzpicture}[scale=.375]
+		\draw[-] (0,0) |- (1,1);
+		\node[font=\footnotesize] at (.45,.5) {#1};
+	\end{tikzpicture}%
+}
+\NewDocumentCommand{\xcom}{ O{\nearrow} O{dr} }{
+	 \ar@{}[#2]|(.375){\doco[#1]}
+}
+\NewDocumentCommand{\xccm}{ O{\nearrow} O{dr} }{
+	 \ar@{}[#2]|(.675){\docc[#1]}
+}
+
+%================================================
+% XY-matrix helpers
+%================================================
+\NewDocumentCommand{\vxy}{o m}{
+  \IfNoValueTF{#1}
+    {\vcenter{\xymatrix{#2}}}
+    {\vcenter{\xymatrix#1{#2}}}
+}
+
+\NewDocumentCommand{\celtag}{ O{dr} m }{
+  \ar[#1,white, "#2"{black,description}]
+}
+
+%================================================
+% Paired arrows
+%================================================
+\NewDocumentCommand{\pairUp}{ O{r} m m }{
+  \ar[#1]_-{#3}
+  \ar@<.5em>@{<-}[#1]^-{#2}
+}
+
+\NewDocumentCommand{\pairDown}{ O{r} m m }{
+  \ar[#1]^-{#2}
+  \ar@<-.5em>@{<-}[#1]_-{#3}
+}
+
+\NewDocumentCommand{\pair}{ O{r} m m O{\perp} }{
+  \ar@<-.5em>@{<-}[#1]_-{#3}
+  \ar@{}[#1]|-{#4}
+  \ar@<.5em>[#1]^-{#2}
+}
+
+\NewDocumentCommand{\oppair}{ O{r} m m O{\perp} }{
+  \ar@<-.5em>[#1]_-{#3}
+  \ar@{}[#1]|-{#4}
+  \ar@{<-}@<.5em>[#1]^-{#2}
+}
+
+\NewDocumentCommand{\arar}{ O{r} m m }{
+  \ar@<-.25em>[#1]_-{#3}
+  \ar@<.25em>[#1]^-{#2}
+}
+% \makeatletter 
+%================================================
+% Structured bracketed constructions
+%================================================
+\NewDocumentCommand{\prevar}{ o m m }{
+  \IfNoValueTF{#1}{
+    \begin{smallmatrix}
+      #2 \\ \downarrow \\ #3
+    \end{smallmatrix}
+  }{
+    \begin{xsmallmatrix}{0em}
+      & #2 \\
+      #1 & \downarrow \\
+      & #3
+    \end{xsmallmatrix}
+  }
+}
 
 \ExplSyntaxOn
-\NewDocumentCommand{\var}{o m O{s} m}{
-	\str_case:nn { #3 } {
-		{r}{\left(       \prevar[#1]{#2}{#4} \right)       }
-		{s}{\left[       \prevar[#1]{#2}{#4} \right]       }
-		{c}{\left\{      \prevar[#1]{#2}{#4} \right\}      }
-		{a}{\left\langle \prevar[#1]{#2}{#4} \right\rangle }
-	}}
-\newcommand{\precop}[2]{
-	\begin{smallmatrix}
-		#1 \\ #2
-	\end{smallmatrix}
-}
-\NewDocumentCommand{\cop}{O{r} m m}{
-	\str_case:nn { #1 } {
-		{r}{\left(       \precop{#2}{#3} \right)       }
-		{s}{\left[       \precop{#2}{#3} \right]       }
-		{c}{\left\{      \precop{#2}{#3} \right\}      }
-		{a}{\left\langle \precop{#2}{#3} \right\rangle }
-	}}
 
-\NewDocumentCommand{\sm}{O{r} m}{
-\str_case:nn { #1 } {
-		{r}{\left(       \bsmat #2 \esmat \right)       }
-		{s}{\left[       \bsmat #2 \esmat \right]       }
-		{c}{\left\{      \bsmat #2 \esmat \right\}      }
-		{a}{\left\langle \bsmat #2 \esmat \right\rangle }
-	}
+\NewDocumentCommand{\var}{ o m O{s} m }{
+  \str_case:nn { #3 } {
+    {r}{\left(       \prevar[#1]{#2}{#4} \right)}
+    {s}{\left[       \prevar[#1]{#2}{#4} \right]}
+    {c}{\left\{      \prevar[#1]{#2}{#4} \right\}}
+    {a}{\left\langle \prevar[#1]{#2}{#4} \right\rangle}
+  }
 }
+
+\NewDocumentCommand{\precop}{ m m }{
+  \begin{smallmatrix}
+    #1 \\ #2
+  \end{smallmatrix}
+}
+
+\NewDocumentCommand{\cop}{ O{r} m m }{
+  \str_case:nn { #1 } {
+    {r}{\left(       \precop{#2}{#3} \right)}
+    {s}{\left[       \precop{#2}{#3} \right]}
+    {c}{\left\{      \precop{#2}{#3} \right\}}
+    {a}{\left\langle \precop{#2}{#3} \right\rangle}
+  }
+}
+
+\NewDocumentCommand{\sm}{ O{r} m }{
+  \str_case:nn { #1 } {
+    {r}{\left(       \bsmat #2 \esmat \right)}
+    {s}{\left[       \bsmat #2 \esmat \right]}
+    {c}{\left\{      \bsmat #2 \esmat \right\}}
+    {a}{\left\langle \bsmat #2 \esmat \right\rangle}
+  }
+}
+
 \ExplSyntaxOff
 
+%================================================
+% Adjustbox environments
+%================================================
 \usepackage{adjustbox}
-\newenvironment{adju}[1][0.925]{%
-	\begin{center}\begin{adjustbox}{max height=0.5\textheight, max width=#1\textwidth}}{\end{adjustbox}\end{center}}
 
-\newenvironment{bareadju}[1][0.925]{%
-	\begin{adjustbox}{max height=0.5\textheight, max width=#1\textwidth}}{\end{adjustbox}}
+\NewDocumentEnvironment{adju}{ O{0.925} }
+  {\begin{center}\begin{adjustbox}{max height=0.5\textheight, max width=#1\textwidth}}
+  {\end{adjustbox}\end{center}}
 
+\NewDocumentEnvironment{bareadju}{ O{0.925} }
+  {\begin{adjustbox}{max height=0.5\textheight, max width=#1\textwidth}}
+  {\end{adjustbox}}
 
-\def\emdash{\text{-}}
-\NewDocumentCommand{\VCat}{ O{\clV} }{#1\emdash\Cat}
-\def\twoCat{\VCat[2]}
-
-\newcommand{\adja}[4]{
-	#1 : \xymatrix{#2 \ar@<.5em>[r] \ar@{}[r]|\perp & \ar@<.5em>[l] #3 } : #4
-}
-
-
-\NewDocumentCommand{\vxy}{o m}{
-	\IfNoValueTF{#1}
-	{\vcenter{\xymatrix{#2}}} % do if \vxy{bla}
-	{\vcenter{\xymatrix#1{#2}}} % do if \vxy[foo]{bla}
-}
-
-\newcommand{\de}{\partial}
-\NewDocumentCommand{\FMly}{ O{} }{\IfNoValueTF{#1}{F\emdash\Mly}{F^{#1}\emdash\Mly}}
-\NewDocumentCommand{\FMre}{ O{} }{\IfNoValueTF{#1}{F\emdash\Mre}{F^{#1}\emdash\Mre}}
-\newcommand{\dMly}{\de\emdash\Mly}
-\newcommand{\dMre}{\de\emdash\Mre}
-
-\newcommand{\oo}[1]{#1^\op \times #1}
+%================================================
+% ⚠️ Deliberately dangerous but preserved
+%================================================
+\def\[{\begin{equation}}
+\def\]{\end{equation}}
